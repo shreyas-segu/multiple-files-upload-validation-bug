@@ -1,0 +1,3 @@
+curl --location 'http://localhost:3000' \
+--form 'file_one=@"/Users/admin/Downloads/SamplePNGImage_100kbmb.png"' \
+--form 'file_two=@"/Users/admin/Downloads/SamplePNGImage_100kbmb.png"'
