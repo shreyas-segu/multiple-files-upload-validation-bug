@@ -1,0 +1,2 @@
+curl --location 'http://localhost:3000/working' \
+--form 'file_one=@"~/SamplePNGImage_100kbmb.png"'

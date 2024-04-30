@@ -2,11 +2,15 @@ import {
   Controller,
   ParseFilePipeBuilder,
   Post,
+  UploadedFile,
   UploadedFiles,
   UseInterceptors,
 } from '@nestjs/common';
 import { AppService } from './app.service';
-import { FileFieldsInterceptor } from '@nestjs/platform-express';
+import {
+  FileFieldsInterceptor,
+  FileInterceptor,
+} from '@nestjs/platform-express';
 
 @Controller()
 export class AppController {
@@ -35,5 +39,19 @@ export class AppController {
     },
   ): string {
     return files.file_one[0].originalname + files.file_two[0].originalname;
+  }
+
+  @Post('/working')
+  @UseInterceptors(FileInterceptor('file_one'))
+  testSingleFil(
+    @UploadedFile(
+      new ParseFilePipeBuilder()
+        .addFileTypeValidator({ fileType: new RegExp(/.(jpg|jpeg|png)$/) })
+        .addMaxSizeValidator({ maxSize: 500 * 1024 })
+        .build(),
+    )
+    file: Express.Multer.File,
+  ): string {
+    return file.originalname;
   }
 }
