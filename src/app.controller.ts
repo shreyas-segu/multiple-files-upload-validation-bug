@@ -26,6 +26,7 @@ export class AppController {
   testMultipleFiles(
     @UploadedFiles(
       new ParseFilePipeBuilder()
+        // None of the following work
         // .addFileTypeValidator({ fileType: 'image/png' })
         // .addFileTypeValidator({ fileType: 'png' })
         // .addFileTypeValidator({ fileType: new RegExp(/.(jpg|jpeg|png)$/) })
